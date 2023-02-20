@@ -1,3 +1,4 @@
+using dotnet_web_api;
 using dotnet_web_api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddNpgsql<TasksContext>(builder.Configuration.GetConnectionString("DbTasks"));
+
 //dDependency Injection
 builder.Services.AddScoped<IHelloWorldService, HelloWorldService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
